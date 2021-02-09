@@ -1,5 +1,6 @@
 <template>
-  <div id="task">
+  <div class="task"
+  :class="stateClass">
     <p>{{ task.name }}</p>
   </div>
 </template>
@@ -21,4 +22,31 @@ export default {
 </script>
 
 <style>
+  .task{
+    box-sizing: border-box;
+    width: 350px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+  .pending {
+    border-left: 15px solid #B73229;
+    background-color: #F44336;
+  }
+
+  .done {
+    color: #DDD;
+    border-left: 15px solid #0A8F08;
+    background-color: #4CAF50;
+    text-decoration: line-through;
+  }
 </style>
