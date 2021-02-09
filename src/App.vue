@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <h1>Tarefas</h1>
-		<task-grid :tasks="tasks"/>
+    <task-grid :tasks="tasks" />
   </div>
 </template>
 
 <script>
-import TaskGrid from "./components/TaskGrid"
+import TaskGrid from "./components/TaskGrid";
 export default {
   components: { TaskGrid },
   data() {
@@ -14,7 +14,7 @@ export default {
       tasks: [
         { name: "Lavar a casa", pending: true },
         { name: "Compras do mês", pending: true },
-        { name: "Lavar o carro", pending: false }
+        { name: "Lavar o carro", pending: false },
       ],
     };
   },
