@@ -1,22 +1,32 @@
 <template>
   <div id="app">
     <h1>Tarefas</h1>
+    <new-task @taskAdded="addTask" />
     <task-grid :tasks="tasks" />
   </div>
 </template>
 
 <script>
 import TaskGrid from "./components/TaskGrid";
+import NewTask from "./components/NewTask";
 export default {
-  components: { TaskGrid },
+  components: { TaskGrid, NewTask },
   data() {
     return {
-      tasks: [
-        { name: "Lavar a casa", pending: true },
-        { name: "Compras do mês", pending: true },
-        { name: "Lavar o carro", pending: false },
-      ],
+      tasks: [],
     };
+  },
+  methods: {
+    addTask(task) {
+      const isSameName = (t) => t.name === task.name;
+      const isNew = this.tasks.filter(isSameName).length == 0;
+      if (isNew && task.name) {
+        this.tasks.push({
+          name: task.name,
+          pending: task.pending || true,
+        });
+      }
+    },
   },
 };
 </script>
