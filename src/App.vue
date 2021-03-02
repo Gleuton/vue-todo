@@ -2,7 +2,11 @@
   <div id="app">
     <h1>Tarefas</h1>
     <new-task @taskAdded="addTask" />
-    <task-grid @taskDeleted="deleteTasks" :tasks="tasks" />
+    <task-grid
+      :tasks="tasks"
+      @taskDeleted="deleteTasks"
+      @taskStateChanged="toggleTaskState"
+    />
   </div>
 </template>
 
@@ -26,6 +30,9 @@ export default {
           pending: task.pending || true,
         });
       }
+    },
+    toggleTaskState(i) {
+      this.tasks[i].pending = !this.tasks[i].pending;
     },
     deleteTasks(i) {
       this.tasks.splice(i, 1);
