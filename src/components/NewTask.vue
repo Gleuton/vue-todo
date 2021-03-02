@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     add() {
-      this.$emit("taskAdded", { name: this.name });
+      this.$emit("taskAdded", { name: this.name.trim() });
       this.name = "";
     },
   },
