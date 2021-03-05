@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Tarefas</h1>
+    <TasksProgress :progress="progress" />
     <new-task @taskAdded="addTask" />
     <task-grid
       :tasks="tasks"
@@ -11,10 +12,12 @@
 </template>
 
 <script>
+import TasksProgress from "./components/TasksProgress";
 import TaskGrid from "./components/TaskGrid";
 import NewTask from "./components/NewTask";
+
 export default {
-  components: { TaskGrid, NewTask },
+  components: { TaskGrid, NewTask, TasksProgress },
   data() {
     return {
       tasks: [],
@@ -36,6 +39,14 @@ export default {
     },
     deleteTasks(i) {
       this.tasks.splice(i, 1);
+    },
+  },
+  computed: {
+    progress() {
+      const total_tasks = this.tasks.length;
+      const done_tasks = this.tasks.filter((task) => !task.pending).length;
+      const result = (done_tasks / total_tasks) * 100 || 0;
+      return result.toFixed(1);
     },
   },
 };
