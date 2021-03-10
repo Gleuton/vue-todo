@@ -45,9 +45,20 @@ export default {
     progress() {
       const total_tasks = this.tasks.length;
       const done_tasks = this.tasks.filter((task) => !task.pending).length;
-      const result = (done_tasks / total_tasks) * 100 || 0;
-      return result.toFixed(1);
+      return Math.round((done_tasks / total_tasks) * 100 || 0);
     },
+  },
+  watch: {
+    tasks: {
+      deep: true,
+      handler() {
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      },
+    },
+  },
+  created() {
+    const json = localStorage.getItem("tasks");
+    this.tasks = JSON.parse(json) || [];
   },
 };
 </script>
